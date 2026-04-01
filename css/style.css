@@ -64,8 +64,8 @@ body {
 .logo-wrap {
   position: relative;
   z-index: 1;
-  width: 200px;
-  height: 200px;
+  width: 300px;
+  height: 300px;
   border-radius: 32px;
   overflow: hidden;
   box-shadow: 0 0 80px rgba(240,180,0,0.3), 0 12px 40px rgba(0,0,0,0.6);
