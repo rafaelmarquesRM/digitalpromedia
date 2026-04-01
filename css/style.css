@@ -4,7 +4,6 @@
   --navy: #060d24;
   --navy2: #0a1535;
   --gold: #f0b400;
-  --gold2: #ffcc33;
   --white: #ffffff;
   --muted: rgba(255,255,255,0.55);
 }
@@ -41,18 +40,43 @@ body {
   pointer-events: none;
 }
 
-.logo-wrap {
-  width: 160px;
-  height: 160px;
-  border-radius: 28px;
+/* ── FUNDO DECORATIVO ── */
+.bg-deco {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
   overflow: hidden;
-  box-shadow: 0 0 60px rgba(240,180,0,0.25), 0 8px 32px rgba(0,0,0,0.5);
+  z-index: 0;
+}
+
+.deco { position: absolute; }
+
+.deco-chart  { width: 600px; bottom: 60px;  left: -40px; }
+.deco-bars   { width: 260px; bottom: 40px;  right: 30px; }
+.deco-arrow  { width: 120px; top: 80px;     right: 80px; }
+.deco-dollar { width: 160px; top: 30px;     left: 20px; }
+.deco-dollar2{ width: 220px; bottom: 100px; right: -10px; }
+.deco-calc   { width: 110px; top: 120px;    right: 220px; }
+.deco-cursor { width: 70px;  bottom: 160px; left: 120px; }
+.deco-pie    { width: 140px; top: 60px;     left: 220px; }
+
+/* ── LOGO ── */
+.logo-wrap {
+  position: relative;
+  z-index: 1;
+  width: 200px;
+  height: 200px;
+  border-radius: 32px;
+  overflow: hidden;
+  box-shadow: 0 0 80px rgba(240,180,0,0.3), 0 12px 40px rgba(0,0,0,0.6);
   margin-bottom: 40px;
   animation: floatIn .8s cubic-bezier(.22,1,.36,1) both;
 }
 .logo-wrap img { width: 100%; height: 100%; object-fit: cover; }
 
 h1 {
+  position: relative;
+  z-index: 1;
   font-family: 'Bebas Neue', sans-serif;
   font-size: clamp(3rem, 8vw, 6rem);
   line-height: 1;
@@ -62,33 +86,46 @@ h1 {
 h1 span { color: var(--gold); }
 
 .sub {
+  position: relative;
+  z-index: 1;
   margin-top: 20px;
   font-size: clamp(1rem, 2.5vw, 1.25rem);
-  color: var(--muted);
+  color: var(--white);
   max-width: 520px;
   line-height: 1.6;
   animation: floatIn .9s .2s cubic-bezier(.22,1,.36,1) both;
 }
 
+/* ── CTA PISCANDO ── */
 .cta {
+  position: relative;
+  z-index: 1;
   display: inline-flex;
   align-items: center;
   gap: 12px;
   margin-top: 44px;
   padding: 18px 40px;
   background: var(--gold);
-  color: var(--navy);
+  color: var(--white);
   font-family: 'DM Sans', sans-serif;
   font-weight: 700;
   font-size: 1.1rem;
   border-radius: 100px;
   text-decoration: none;
   box-shadow: 0 4px 30px rgba(240,180,0,0.4);
-  transition: transform .2s, box-shadow .2s;
-  animation: floatIn .9s .35s cubic-bezier(.22,1,.36,1) both;
+  animation: floatIn .9s .35s cubic-bezier(.22,1,.36,1) both, pulse 2s 1.3s ease-in-out infinite;
 }
-.cta:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 8px 40px rgba(240,180,0,0.55); }
+.cta:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 8px 40px rgba(240,180,0,0.65);
+  animation: none;
+}
 .cta svg { flex-shrink: 0; }
+
+@keyframes pulse {
+  0%, 100% { box-shadow: 0 4px 30px rgba(240,180,0,0.4); }
+  50%       { box-shadow: 0 4px 50px rgba(240,180,0,0.85), 0 0 0 10px rgba(240,180,0,0.12); }
+}
 
 /* ── PARTNERS ── */
 .partners {
@@ -112,14 +149,19 @@ h1 span { color: var(--gold); }
   margin-bottom: 10px;
 }
 .partners h2 span { color: var(--gold); }
-.partners p { color: var(--muted); font-size: .95rem; margin-bottom: 52px; }
+
+.partners p {
+  color: var(--white);
+  font-size: .95rem;
+  margin-bottom: 52px;
+}
 
 .grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
-  max-width: 860px;
+  max-width: 700px;
   margin: 0 auto;
 }
 
@@ -149,20 +191,119 @@ h1 span { color: var(--gold); }
   background: rgba(240,180,0,0.12);
 }
 .partner-card .icon svg { width: 28px; height: 28px; }
-.partner-card span {
-  font-weight: 700;
-  font-size: .95rem;
-  color: var(--white);
-}
-.partner-card small { color: var(--muted); font-size: .78rem; text-align: center; }
+.partner-card span { font-weight: 700; font-size: .95rem; color: var(--white); }
+.partner-card small { color: var(--white); font-size: .78rem; text-align: center; opacity: .75; }
 
 /* ── FOOTER ── */
 footer {
   text-align: center;
   padding: 28px 24px;
-  color: rgba(255,255,255,0.25);
+  color: var(--white);
   font-size: .8rem;
   border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ── TEAM ── */
+.team {
+  padding: 80px 24px 100px;
+  text-align: center;
+  background: var(--navy);
+  position: relative;
+}
+.team::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(240,180,0,0.3), transparent);
+}
+
+.team h2 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  letter-spacing: .04em;
+  margin-bottom: 10px;
+}
+.team h2 span { color: var(--gold); }
+
+.team-sub {
+  color: var(--white);
+  font-size: .95rem;
+  margin-bottom: 52px;
+}
+
+.team-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.team-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 20px;
+  padding: 36px 28px 28px;
+  flex: 1 1 200px;
+  max-width: 230px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: border-color .25s, background .25s, transform .25s;
+}
+.team-card:hover {
+  border-color: rgba(240,180,0,0.35);
+  background: rgba(240,180,0,0.06);
+  transform: translateY(-4px);
+}
+
+.team-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold), #a07800);
+  color: var(--navy);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 6px;
+  box-shadow: 0 0 24px rgba(240,180,0,0.25);
+}
+
+.team-card strong {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--white);
+}
+
+.team-card small {
+  color: var(--gold);
+  font-size: .8rem;
+  font-weight: 500;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+}
+
+.team-btn {
+  margin-top: 14px;
+  display: inline-block;
+  padding: 10px 22px;
+  border: 1.5px solid var(--gold);
+  color: var(--gold);
+  border-radius: 100px;
+  font-size: .85rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background .2s, color .2s;
+}
+.team-btn:hover {
+  background: var(--gold);
+  color: var(--navy);
 }
 
 /* ── ANIMATIONS ── */
